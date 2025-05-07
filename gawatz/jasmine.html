@@ -15,6 +15,7 @@
       height: 100vh;
       overflow: hidden;
     }
+
     .card {
       background: white;
       border-radius: 20px;
@@ -22,78 +23,120 @@
       padding: 40px;
       text-align: center;
       max-width: 400px;
-      animation: fadeIn 1s ease;
+      position: relative;
     }
+
     .card h1 {
-      font-size: 24px;
+      font-size: 22px;
       color: #d63384;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
+
+    .img-container {
+      position: relative;
+      margin: 0 auto 30px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 25px #ff69b4;
+      animation: glow 2s infinite alternate;
+    }
+
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      color: #ff1493;
+      animation: rotateHeart 6s linear infinite;
+    }
+
+    .heart:nth-child(1) { top: -10px; left: 50%; transform-origin: center 120px; }
+    .heart:nth-child(2) { top: 50%; left: -10px; transform-origin: 120px center; }
+    .heart:nth-child(3) { bottom: -10px; left: 50%; transform-origin: center -120px; }
+    .heart:nth-child(4) { top: 50%; right: -10px; transform-origin: -120px center; }
+
+    @keyframes rotateHeart {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px #ff69b4; }
+      100% { box-shadow: 0 0 30px #ff69b4; }
+    }
+
     .btn {
       padding: 12px 30px;
       font-size: 16px;
       border: none;
       border-radius: 25px;
-      cursor: pointer;
       margin: 10px;
+      cursor: pointer;
       transition: 0.3s;
     }
-    .yes {
-      background: #ff69b4;
+
+    .btn-yes {
+      background-color: #ff4da6;
       color: white;
-      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
     }
-    .no {
-      background: #f8f9fa;
-      color: #d63384;
-      position: relative;
-    }
-    .love {
+
+    .btn-no {
+      background-color: #f8d7da;
+      color: #721c24;
       position: absolute;
-      font-size: 24px;
-      animation: floatUp 2s forwards;
+    }
+
+    .love-popup {
+      position: fixed;
+      font-size: 30px;
+      animation: popUp 1s ease-out forwards;
       pointer-events: none;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes floatUp {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-100px); }
+    @keyframes popUp {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; top: -100px; }
     }
   </style>
 </head>
 <body>
+  <div class="card">
+    <div class="img-container">
+      <img src="https://i.postimg.cc/tJQKty8q/photo-6111421859150021366-y.jpg" alt="Jasmine">
+      <div class="heart">❤️</div>
+      <div class="heart">❤️</div>
+      <div class="heart">❤️</div>
+      <div class="heart">❤️</div>
+    </div>
+    <h1>Haloo Jasmine 💕<br>Would you be my girlfriend?</h1>
+    <button class="btn btn-yes" onclick="showLove()">Yes 💖</button>
+    <button class="btn btn-no" onmouseover="moveButton(this)">No 😢</button>
+  </div>
 
-<div class="card">
-  <h1>Haloo Jasmine 💕<br>Would you be my girlfriend?</h1>
-  <button class="btn yes" onclick="showLove()">Yes 💖</button>
-  <button class="btn no" onmouseover="moveNo()">No 🙅‍♀️</button>
-</div>
+  <script>
+    function showLove() {
+      const heart = document.createElement('div');
+      heart.classList.add('love-popup');
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(heart);
 
-<script>
-  function showLove() {
-    const heart = document.createElement("div");
-    heart.classList.add("love");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = Math.random() * window.innerHeight + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2000);
-  }
+      setTimeout(() => heart.remove(), 1000);
+    }
 
-  function moveNo() {
-    const noButton = document.querySelector(".no");
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-    noButton.style.position = "absolute";
-    noButton.style.left = x + "px";
-    noButton.style.top = y + "px";
-  }
-</script>
-
+    function moveButton(btn) {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      btn.style.left = x + 'px';
+      btn.style.top = y + 'px';
+    }
+  </script>
 </body>
 </html>
