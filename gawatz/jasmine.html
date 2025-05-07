@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Jasmine 💌</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffe0e9, #fff0f5);
+      font-family: 'Segoe UI', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(255, 0, 102, 0.3);
+      padding: 40px;
+      text-align: center;
+      max-width: 400px;
+      animation: fadeIn 1s ease;
+    }
+    .card h1 {
+      font-size: 24px;
+      color: #d63384;
+      margin-bottom: 30px;
+    }
+    .btn {
+      padding: 12px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+    .yes {
+      background: #ff69b4;
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+    }
+    .no {
+      background: #f8f9fa;
+      color: #d63384;
+      position: relative;
+    }
+    .love {
+      position: absolute;
+      font-size: 24px;
+      animation: floatUp 2s forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-100px); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Haloo Jasmine 💕<br>Would you be my girlfriend?</h1>
+  <button class="btn yes" onclick="showLove()">Yes 💖</button>
+  <button class="btn no" onmouseover="moveNo()">No 🙅‍♀️</button>
+</div>
+
+<script>
+  function showLove() {
+    const heart = document.createElement("div");
+    heart.classList.add("love");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = Math.random() * window.innerHeight + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+  }
+
+  function moveNo() {
+    const noButton = document.querySelector(".no");
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noButton.style.position = "absolute";
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
+  }
+</script>
+
+</body>
+</html>
